@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobile_skeleton/constants/UrlConstants.dart';
-import 'package:mobile_skeleton/interceptors/LoggingInterceptors.dart';
 
+import '../constants/UrlConstants.dart';
+import '../interceptors/LoggingInterceptors.dart';
 import 'PreferencesUtil.dart';
 
 GetIt locator = GetIt.instance;
@@ -22,6 +24,6 @@ Future baseDio() async {
 }
 
 Future setupLocator() async {
-  PreferencesUtil util = await PreferencesUtil.getInstance();
+  PreferencesUtil util = (await PreferencesUtil.getInstance())!;
   locator.registerSingleton<PreferencesUtil>(util);
 }

@@ -1,11 +1,11 @@
 import '../LoadApiStatus.dart';
 
 class BaseResponse<T> {
-  String status;
-  String message;
-  String error;
-  List<T> data;
-  LoadApiStatus loadStatus;
+  String? status;
+  String? message;
+  String? error;
+  List<T>? data;
+  LoadApiStatus? loadStatus;
 
   BaseResponse({this.status, this.message, this.data, this.error});
 
@@ -17,7 +17,7 @@ class BaseResponse<T> {
       Map<String, dynamic> jsonData, Function fromJson) {
     final items = jsonData['data'];
 
-    List<T> output = List();
+    List<T> output = [];
 
     if (items is Iterable) {
       for (Map<String, dynamic> json in items) {
@@ -37,6 +37,6 @@ class BaseResponse<T> {
   BaseResponse.withError(String errorValue)
       : status = "",
         message = "",
-        data = List(),
+        data = [],
         error = errorValue;
 }

@@ -24,26 +24,7 @@ class LoginBloc {
     try {
       BaseResponse<LoginResponse> response =
           await repository.login(email, password);
-      util.putString(PreferencesUtil.userId, response.data[0].userId);
-      var randomId = new Random();
-      await Account(
-              id: randomId.nextInt(5000),
-              userId: response.data[0].userId,
-              email: response.data[0].email,
-              fullName: response.data[0].fullName,
-              gender: response.data[0].gender,
-              address: response.data[0].address,
-              phone: response.data[0].phone,
-              birthDate: response.data[0].birthDate,
-              city: response.data[0].city,
-              zipCode: response.data[0].zipCode,
-              isActive: response.data[0].isActive,
-              idDoku: response.data[0].idDoku,
-              whatsAppNumber: response.data[0].whatsAppNumber,
-              loginCheck: response.data[0].loginCheck,
-              deviceLoyalty: response.data[0].deviceLoyalty,
-              createDate: response.data[0].createDate)
-          .save();
+      util.putString(PreferencesUtil.userId, response.data![0].userId);
       subject.sink.add(BaseResponse.completed(response.data));
     } catch (e) {
       subject.sink.add(BaseResponse.error(e.toString()));

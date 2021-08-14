@@ -5,36 +5,36 @@ part 'LoginResponse.g.dart';
 @JsonSerializable()
 class LoginResponse {
   @JsonKey(name: "UserID")
-  final String userId;
+  final String? userId;
   @JsonKey(name: "Email")
-  final String email;
+  final String? email;
   @JsonKey(name: "NamaLengkap")
-  final String fullName;
+  final String? fullName;
   @JsonKey(name: "Gender")
-  final String gender;
+  final String? gender;
   @JsonKey(name: "Alamat")
-  final String address;
+  final String? address;
   @JsonKey(name: "NoHp")
-  final String phone;
+  final String? phone;
   @JsonKey(name: "TglLahir")
-  final String birthDate;
+  final String? birthDate;
   @JsonKey(name: "Kota")
-  final String city;
+  final String? city;
   @JsonKey(name: "ZipCode")
-  final String zipCode;
+  final String? zipCode;
   @JsonKey(name: "Aktif")
-  final String isActive;
+  final String? isActive;
   @JsonKey(name: "IdDoku")
-  final String idDoku;
+  final String? idDoku;
   @JsonKey(name: "WhatsAppNumber")
-  final String whatsAppNumber;
+  final String? whatsAppNumber;
   @JsonKey(name: "CekLogin")
-  final String loginCheck;
+  final String? loginCheck;
   @JsonKey(name: "DeviceLoyalty")
-  final String deviceLoyalty;
+  final String? deviceLoyalty;
   @JsonKey(name: "CreateDate")
-  final String createDate;
-  final String error;
+  final String? createDate;
+  final String? error;
 
   LoginResponse(
       {this.userId,

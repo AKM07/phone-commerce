@@ -8,22 +8,22 @@ part of 'LoginResponse.dart';
 
 LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
   return LoginResponse(
-    userId: json['UserID'] as String,
-    email: json['Email'] as String,
-    fullName: json['NamaLengkap'] as String,
-    gender: json['Gender'] as String,
-    address: json['Alamat'] as String,
-    phone: json['NoHp'] as String,
-    birthDate: json['TglLahir'] as String,
-    city: json['Kota'] as String,
-    zipCode: json['ZipCode'] as String,
-    isActive: json['Aktif'] as String,
-    idDoku: json['IdDoku'] as String,
-    whatsAppNumber: json['WhatsAppNumber'] as String,
-    loginCheck: json['CekLogin'] as String,
-    deviceLoyalty: json['DeviceLoyalty'] as String,
-    createDate: json['CreateDate'] as String,
-    error: json['error'] as String,
+    userId: json['UserID'] as String?,
+    email: json['Email'] as String?,
+    fullName: json['NamaLengkap'] as String?,
+    gender: json['Gender'] as String?,
+    address: json['Alamat'] as String?,
+    phone: json['NoHp'] as String?,
+    birthDate: json['TglLahir'] as String?,
+    city: json['Kota'] as String?,
+    zipCode: json['ZipCode'] as String?,
+    isActive: json['Aktif'] as String?,
+    idDoku: json['IdDoku'] as String?,
+    whatsAppNumber: json['WhatsAppNumber'] as String?,
+    loginCheck: json['CekLogin'] as String?,
+    deviceLoyalty: json['DeviceLoyalty'] as String?,
+    createDate: json['CreateDate'] as String?,
+    error: json['error'] as String?,
   );
 }
 

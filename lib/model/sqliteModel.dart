@@ -15,14 +15,6 @@ const accountTable = SqfEntityTable(tableName: 'account', fields: [
   SqfEntityField('address', DbType.text),
   SqfEntityField('phone', DbType.text),
   SqfEntityField('birthDate', DbType.text),
-  SqfEntityField('city', DbType.text),
-  SqfEntityField('zipCode', DbType.text),
-  SqfEntityField('isActive', DbType.text),
-  SqfEntityField('idDoku', DbType.text),
-  SqfEntityField('whatsAppNumber', DbType.text),
-  SqfEntityField('loginCheck', DbType.text),
-  SqfEntityField('deviceLoyalty', DbType.text),
-  SqfEntityField('createDate', DbType.text)
 ]);
 
 const seqIdentity = SqfEntitySequence(
@@ -31,8 +23,8 @@ const seqIdentity = SqfEntitySequence(
 
 @SqfEntityBuilder(dbModel)
 const dbModel = SqfEntityModel(
-    modelName: 'AgrotechDBModel',
-    databaseName: 'agrotech.db',
+    modelName: 'AwesomeDBModel',
+    databaseName: 'awesome.db',
     databaseTables: [accountTable],
     sequences: [seqIdentity],
     bundledDatabasePath: null);

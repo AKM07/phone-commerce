@@ -13,7 +13,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     SizeUtil().init(context);
-    double defaultSize = SizeUtil.defaultSize;
+    double defaultSize = SizeUtil.defaultSize!;
     return Scaffold(
       body: SafeArea(
         child: Container(
