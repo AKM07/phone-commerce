@@ -1,16 +1,83 @@
-# mobile_skeleton
+# 🧵 Mobile Skeleton
 
-A starting point for develop flutter application
+> **Mobile skeleton** a quick starter kit project to develop **flutter** application
 
-## Getting Started
+## 🚜 General Functionally
 
-This project is a starting point for a Flutter application.
+- lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+- lorem ipsum lorem ipsum lorem ipsum lorem ipsum
 
-A few resources to get you started if this is your first Flutter project:
+## 🏗 Structure
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- **bloc** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+- **constant** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+- **interceptors** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+- **model** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+- **pages** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+- **repository** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+- **utils** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+- **main.dart** — This is the starting point of the application
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🏁 Getting Started
+
+- Clone / Download this project
+- Go to project root and execute the following command in console to get the required dependencies: 
+
+```
+flutter pub get
+
+```
+- Run this project
+```
+flutter run
+
+```
+- Test
+
+```
+flutter test 
+```
+
+## 🦾 Tech Stack
+
+> All the dependency we used
+
+### View
+
+- **cupertino_icons**
+- **fluttertoast**
+- **url_launcher**
+- **flutter_feather_icons**
+- **intl**
+- **flutter_local_notifications**
+
+### Networking
+
+- **dio**
+- **shared_preferences**
+- **equatable**
+- **rxdart**
+- **get_it**
+- **http**
+- **connectivity**
+
+### Architecture
+
+- **flutter_bloc**
+- **yaml**
+- **glob**
+
+### Database
+- **sqfentity**
+- **sqfentity_gen**
+- **path_provider**
+
+
+## 🤝 Contribution
+
+Contributions, issues, and feature requests are welcome
+
+## 🎁 Support
+
+Give a ⭐️ if this project inspired you 😉
+
