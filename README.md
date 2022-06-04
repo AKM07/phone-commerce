@@ -9,13 +9,13 @@
 
 ## 🏗 Structure
 
-- **bloc** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
-- **constant** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-- **interceptors** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-- **model** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-- **pages** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-- **repository** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-- **utils** — lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+- **controllers** — Contains project logic and process data that received from repository 
+- **constant** — Contains project default value
+- **interceptors** — Contains file used for networking configuration
+- **model** — Contains project data models.
+- **pages** — Contains files used for presentations/UI.
+- **repository** — Contains files that used for request data to API or get data from local database.
+- **utils** — Contains project configurations.
 - **main.dart** — This is the starting point of the application
 
 ## 🏁 Getting Started
@@ -63,7 +63,7 @@ flutter test
 
 ### Architecture
 
-- **flutter_bloc**
+- **GetX**
 - **yaml**
 - **glob**
 
