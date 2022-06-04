@@ -4,8 +4,7 @@
 
 ## 🚜 General Functionally
 
-- lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-- lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+- This project is used as a starting point for developing the flutter mobile application so that the development process is faster
 
 ## 🏗 Structure
 
