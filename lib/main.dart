@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:mobile_skeleton/utils/injector.dart';
 
 import 'constants/Constants.dart';
 import 'model/sqliteModel.dart';
-import 'pages/DashboardPage.dart';
+import 'pages/ProductsPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,20 +21,18 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: Constants.appName,
-      home: DashboardPage(),
+      home: ProductsPage(),
       initialRoute: '/',
       routes: {
-        '/login': (context) => DashboardPage(),
-        // '/home': (context) => HomePage(),
+        '/': (context) => ProductsPage(),
       },
       theme: ThemeData(
         appBarTheme:
             AppBarTheme(color: Color(Constants.appMainColor), elevation: 0),
         primaryColor: Color(Constants.appMainColor),
         primaryColorDark: Color(Constants.appMainColor),
-        accentColor: Color(0xFFe0e0e0),
         backgroundColor: Constants.appBackgroundColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
