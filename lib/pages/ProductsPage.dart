@@ -1,4 +1,7 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:mobile_skeleton/controllers/ProductController.dart';
@@ -8,13 +11,13 @@ import '../constants/Constants.dart';
 import '../model/response/ProductItemResponse.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class ProductsPage extends StatelessWidget {
-  ProductsPage({Key? key}) : super(key: key);
-
   final productController = Get.find<ProductController>();
 
   final currencyFormatter = new NumberFormat(Constants.currencyFormat);
   final decimalFormatter = new NumberFormat(Constants.decimalFormat);
+  bool _isGettingMoreData = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +29,34 @@ class ProductsPage extends StatelessWidget {
           child: Container(
         width: SizeUtil.screenWidth,
         margin: EdgeInsets.all(20),
-        child: Obx(() => NotificationListener(
-            child: RefreshIndicator(
-                onRefresh: productController.doGetMoreProducts(),
-                child: productsGrid(
-                    defaultSize!, productController.productsData)))),
+        child: NotificationListener(
+            onNotification: (ScrollNotification scrollInfo) {
+          if (scrollInfo.metrics.maxScrollExtent == scrollInfo.metrics.pixels) {
+            if (!_isGettingMoreData) {
+              _isGettingMoreData = true;
+              loadMoreData();
+            }
+          }
+          return true;
+        }, child: Obx(() {
+          _isGettingMoreData = false;
+          return productsGrid(
+              defaultSize!, productController.productsData.value);
+        })),
       )),
     );
   }
 
+  void loadMoreData() {
+    productController.doGetMoreProducts();
+  }
+
   Widget productsGrid(double defaultSize, List<ProductItemResponse> data) {
-    final double itemHeight = defaultSize * 47;
+    final double itemHeight = defaultSize * 42;
     final double itemWidth = SizeUtil.screenWidth! / 2;
     return GridView.builder(
         shrinkWrap: true,
+        itemCount: data.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           childAspectRatio: (itemWidth / itemHeight),
@@ -48,26 +65,18 @@ class ProductsPage extends StatelessWidget {
         ),
         itemBuilder: (BuildContext context, int index) {
           var product = data[index];
-          double finalPrice = 0;
+          double realPrice = 0;
+          if (product.discountPercentage != 0.0) {
+            var discount = (100 - product.discountPercentage);
+            realPrice = product.price * 100 / discount;
+          } else {
+            realPrice = product.price;
+          }
+          if (realPrice < 0) {
+            realPrice = 0;
+          }
           return InkWell(
-            onTap: () async {
-              // var status = await Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => ProductDetailPage(
-              //             product: product,
-              //           )),
-              // );
-
-              if (product.discountPercentage != 0.0) {
-                finalPrice = product.price * product.discountPercentage / 100;
-              } else {
-                finalPrice = product.price;
-              }
-              if (finalPrice < 0) {
-                finalPrice = 0;
-              }
-            },
+            onTap: () async {},
             child: Container(
               color: Colors.white,
               margin: EdgeInsets.symmetric(horizontal: 5),
@@ -75,28 +84,17 @@ class ProductsPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Stack(
-                    children: [
-                      product.thumbnail.length != 0
-                          ? Container(
-                              height: defaultSize * 10,
-                              child: Image.network(product.thumbnail))
-                          : Container(
-                              height: defaultSize * 13,
-                              child: Center(child: Text("No Image")),
-                            ),
-                      Container(
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: SvgPicture.asset(
-                            "assets/images/ic_like.svg",
-                            width: defaultSize * 2,
-                            height: defaultSize * 2,
-                          ),
+                  product.thumbnail.length != 0
+                      ? Container(
+                          height: defaultSize * 13,
+                          child: Image.network(
+                            product.thumbnail,
+                            fit: BoxFit.cover,
+                          ))
+                      : Container(
+                          height: defaultSize * 13,
+                          child: Center(child: Text("No Image")),
                         ),
-                      )
-                    ],
-                  ),
                   SizedBox(
                     height: 5,
                   ),
@@ -112,14 +110,43 @@ class ProductsPage extends StatelessWidget {
                               fontWeight: FontWeight.w500),
                         ),
                         SizedBox(
-                          height: 2,
+                          height: 5,
                         ),
-                        Text(
-                          decimalFormatter.format(product.rating),
-                          style: TextStyle(
-                            color: Color(0xFF596375),
-                            fontSize: 12,
-                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: 5),
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: Icon(FeatherIcons.star,
+                                        color: Colors.orangeAccent,
+                                        size: defaultSize * 1.5),
+                                  ),
+                                ),
+                                Text(
+                                  decimalFormatter.format(product.rating),
+                                  style: TextStyle(
+                                    color: Color(0xFF596375),
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: SvgPicture.asset(
+                                  "assets/images/ic_like.svg",
+                                  width: defaultSize * 1.5,
+                                  height: defaultSize * 1.5,
+                                ),
+                              ),
+                            )
+                          ],
                         )
                       ],
                     ),
@@ -130,14 +157,15 @@ class ProductsPage extends StatelessWidget {
                             Container(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 5, vertical: 1),
+                              margin: EdgeInsets.only(right: 5),
                               decoration: BoxDecoration(
-                                  color: Color(Constants.appMainColor),
+                                  color: Color(Constants.appSecondColor),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(4))),
                               child: Text(
                                 decimalFormatter
                                         .format(product.discountPercentage) +
-                                    "%",
+                                    "% OFF ",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 10,
@@ -145,7 +173,7 @@ class ProductsPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              currencyFormatter.format(product.price),
+                              currencyFormatter.format(realPrice),
                               style: TextStyle(
                                 color: Color(0xFFC2C7CB),
                                 fontSize: 12,
@@ -159,7 +187,7 @@ class ProductsPage extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    currencyFormatter.format(finalPrice),
+                    currencyFormatter.format(product.price),
                     style: TextStyle(
                       color: Color(0xFF596375),
                       fontSize: 16,

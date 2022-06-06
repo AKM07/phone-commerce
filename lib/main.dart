@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:mobile_skeleton/controllers/ProductController.dart';
+import 'package:mobile_skeleton/repository/ProductRepository.dart';
 import 'package:mobile_skeleton/utils/injector.dart';
 
 import 'constants/Constants.dart';
@@ -19,15 +22,19 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final productController = Get
+    ..put(ProductController(productRepository: ProductRepository()));
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: Constants.appName,
-      home: ProductsPage(),
       initialRoute: '/',
-      routes: {
-        '/': (context) => ProductsPage(),
-      },
+      getPages: [
+        GetPage(
+          name: '/',
+          page: () => ProductsPage(),
+        ),
+      ],
       theme: ThemeData(
         appBarTheme:
             AppBarTheme(color: Color(Constants.appMainColor), elevation: 0),
